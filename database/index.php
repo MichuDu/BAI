@@ -12,29 +12,50 @@ $action = $_GET['action'];
 $outputArray = array(
   'error' => array(),
   'message' => array(),
+  'login' => false,
 );
 $output = (object) $outputArray;
 
 switch ($action) {
+  case 'read':
+    $sql = "SELECT * FROM users";
+    $query = $db->query($sql);
+    $users = array();
+
+    while ($row = $query->fetch_array()) {
+      array_push($users, $row);
+    }
+
+    $output->users = $users;
+
+    break;
   case 'login':
     $login = $_POST['login'];
     $password = $_POST['password'];
 
+    $valid = true;
+
     if (!isLoginValidate ($login, $output)) {
-      return;
+      $valid = false;
     }
 
     if (!isPasswordValidate ($password, $output)) {
-      return;
+      $valid = false;
     }
 
-    $sql = "SELECT * FROM users WHERE (`login` = '$login' OR `email`='$login')";
-    $query = $db->query($sql);
-    $result = mysqli_fetch_assoc($query);
+    if ($valid) {
+      $sql = "SELECT * FROM users WHERE (`login` = '$login' OR `email`='$login')";
+      $query = $db->query($sql);
+      $row = $query->fetch_array(MYSQLI_ASSOC);
 
-    if (password_verify($password, $result['password'])) {
-      $userOutput = $result;
-      return;
+      if (password_verify($password, $row['password']) && $query->num_rows > 0) {
+        $user = array();
+        $output->login = true;
+        $output->user = $row;
+      } else {
+        $output->login = false;
+        $output->message['error'] = "Niepoprawny login lub hasło.";
+      }
     }
 
     break;
