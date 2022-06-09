@@ -1,7 +1,13 @@
 <template>
   <div>
     <ul v-for="todo in todos" :key="todo.id">
-      <li>{{ todo.name }}</li>
+      <li>
+        <span :class="{ 'todo-completed': todo.status == 1 }">
+          {{ todo.name }}
+        </span>
+        <button @click="setTodoStatus(todo.id)">Wykonane</button>
+        <button @click="deleteTodo(todo.id)">Usuń</button>
+      </li>
     </ul>
   </div>
 </template>
@@ -13,8 +19,15 @@ import { storeToRefs } from "pinia";
 
 const store = useTodoListStore();
 const { todos } = storeToRefs(store);
+const { setTodoStatus, deleteTodo } = store;
 
 onMounted(() => {
   store.getTodos();
 });
 </script>
+
+<style>
+.todo-completed {
+  text-decoration: line-through;
+}
+</style>

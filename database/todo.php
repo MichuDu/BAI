@@ -44,13 +44,18 @@ if ($action) {
 
       $output->tasks = $tasks;
       break;
+    case 'changeStatus':
+      $id = $_POST['id'];
+
+      $sql = "UPDATE `tasks` SET `status` = NOT `status` WHERE `id` = $id";
+      $query = $db->query($sql);
+      
+      break;
     case 'deleteTask':
       $id = $_POST['id'];
 
-      if ($id) {
-        $sql = "DELETE FROM `tasks` WHERE `id` == '$id'";
-        $query = $db->query($sql);
-      }
+      $sql = "DELETE FROM `tasks` WHERE `id` = $id";
+      $query = $db->query($sql);
 
       break;
   }
