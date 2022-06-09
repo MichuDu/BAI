@@ -40,8 +40,9 @@
 
 <script setup>
 import { useAuthStore } from "@/stores/auth.store";
+import { useTodoListStore } from "@/stores/todolist.store";
 import axios from "axios";
-import { ref, reactive } from "vue";
+import { onMounted, ref, reactive } from "vue";
 
 const actionUrl = `${import.meta.env.VITE_API_URL}?action=login`;
 
@@ -60,7 +61,7 @@ function getFormData(obj) {
     formData.append(key, obj[key]);
   }
   return formData;
-};
+}
 
 function getErrors(messages) {
   errors.splice(0);
@@ -87,4 +88,9 @@ function onSubmit() {
 
   return authStore.login(options);
 }
+
+onMounted(() => {
+  const store = useTodoListStore();
+  store.removeTodos();
+});
 </script>

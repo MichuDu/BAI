@@ -20,7 +20,7 @@
           <label>Login</label>
           <input type="text" v-model="data.login" />
         </div>
-         <div>
+        <div>
           <label>Adres e-mail</label>
           <input type="email" v-model="data.email" />
         </div>
