@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div>
+      <h2>Twoje zadania</h2>
+    </div>
     <TodoAdd />
     <TodoList />
   </div>
