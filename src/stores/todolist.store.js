@@ -11,6 +11,8 @@ export const useTodoListStore = defineStore({
   id: "todoList",
   state: () => ({
     todos: {},
+    todosFilters: [],
+    activeFilter: "",
   }),
   actions: {
     addTodo(todo) {
@@ -41,6 +43,7 @@ export const useTodoListStore = defineStore({
         .then(function (response) {
           self.todos = Object.assign(self.todos, response.data.tasks);
           localStorage.setItem("todos", JSON.stringify(self.todos));
+          self.filterTodos(self.activeFilter);
         })
         .catch((error) => console.log(error));
     },
@@ -75,6 +78,34 @@ export const useTodoListStore = defineStore({
 
     removeTodos() {
       localStorage.removeItem("todos");
+    },
+
+    setActiveFilter(value) {
+      this.activeFilter = value;
+    },
+
+    filterTodos(filter) {
+      this.setActiveFilter(filter);
+
+      switch (filter) {
+        case "all":
+          this.todosFilters = this.todos;
+
+          break;
+        case "uncompleted":
+          this.todosFilters = Object.fromEntries(
+            Object.entries(this.todos).filter(([, value]) => value.status == 0)
+          );
+
+          break;
+
+        case "completed":
+          this.todosFilters = Object.fromEntries(
+            Object.entries(this.todos).filter(([, value]) => value.status == 1)
+          );
+
+          break;
+      }
     },
   },
 });

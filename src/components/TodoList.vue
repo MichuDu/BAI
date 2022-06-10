@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ul v-for="todo in todos" :key="todo.id">
+    <ul v-for="todo in todosFilters" :key="todo.id">
       <li>
         <span :class="{ 'todo-completed': todo.status == 1 }">
           {{ todo.name }}
@@ -18,7 +18,7 @@ import { onMounted } from "vue";
 import { storeToRefs } from "pinia";
 
 const store = useTodoListStore();
-const { todos } = storeToRefs(store);
+const { todosFilters } = storeToRefs(store);
 const { setTodoStatus, deleteTodo } = store;
 
 onMounted(() => {
