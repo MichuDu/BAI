@@ -6,6 +6,15 @@
         <label for="todoName">Co Ci chodzi po głowie?</label>
         <input type="text" name="todoName" id="todoName" v-model="data.name" />
       </div>
+      <div>
+        <input
+          type="checkbox"
+          name="todoFlag"
+          id="todoFlag"
+          v-model="data.flag"
+        />
+        <label for="todoFlag">Ważne</label>
+      </div>
       <button>Dodaj zadanie</button>
       <div v-if="message">
         <p>{{ message }}</p>
@@ -21,7 +30,10 @@ import { onMounted, ref } from "vue";
 
 const data = {
   name: "",
+  flag: false,
 };
+
+const required = ["name"];
 
 let message = ref("");
 
@@ -31,7 +43,7 @@ function addUserIdToData() {
   data["user_id"] = store.getUserId();
 }
 
-function addTodo() {
+function addTodo(e) {
   const store = useTodoListStore();
   let formData = new FormData();
 
@@ -40,12 +52,14 @@ function addTodo() {
   for (let key in data) {
     formData.append(key, data[key]);
 
-    if (!data[key]) {
+    if (required.includes(key) && !data[key]) {
       message.value = "To pole jest wymagane.";
     }
   }
 
   store.addTodo(formData);
+
+  e.target.reset();
 }
 
 onMounted(() => {

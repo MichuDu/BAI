@@ -5,7 +5,11 @@
       name="todo-filter"
       id="todo-filter"
       v-model="activeFilter"
-      @change="filterTodos(activeFilter)"
+      @change="
+        activeCategory
+          ? filterTodos(activeFilter, todosCategorized)
+          : filterTodos(activeFilter, todos)
+      "
     >
       <option value="all">Pokaż wszystko</option>
       <option value="uncompleted">Pokaż do zrobienia</option>
@@ -16,10 +20,14 @@
 
 <script setup>
 import { useTodoListStore } from "@/stores/todolist.store";
+
+import { storeToRefs } from "pinia";
 import { onMounted } from "vue";
 
 const store = useTodoListStore();
+
 const { filterTodos } = store;
+const { todos, todosCategorized, activeCategory } = storeToRefs(store);
 
 const activeFilter = "all";
 

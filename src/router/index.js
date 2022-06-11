@@ -23,6 +23,11 @@ const routes = [
     name: "RegisterSuccess",
     component: () => import("../views/RegisterSuccess.vue"),
   },
+  {
+    path: "/:url",
+    name: "Category",
+    component: () => import("@/views/TodoCategoryView.vue"),
+  },
 ];
 
 const router = createRouter({
