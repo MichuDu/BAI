@@ -1,0 +1,34 @@
+/* Containers */
+body {
+  min-height: 100vh;
+  background-color: $color-beige;
+}
+
+.wrapper {
+  max-width: $container__max-width;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* Links */
+.link {
+  position: relative;
+  cursor: pointer;
+
+  &:hover {
+    &::before {
+      width: 100%;
+    }
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 0;
+    height: 1px;
+    background-color: $color-purple;
+    transition: .3s width;
+  }
+}

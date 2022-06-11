@@ -4,6 +4,12 @@ import TodoHeader from "@/components/TodoHeader.vue";
 </script>
 
 <template>
-  <TodoHeader />
-  <RouterView />
+  <div class="todo-container">
+    <TodoHeader />
+    <RouterView />
+  </div>
 </template>
+
+<style lang="scss">
+@import "@/scss/style.scss";
+</style>

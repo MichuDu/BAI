@@ -1,0 +1,90 @@
+/* Font face */
+@font-face {
+  font-family: "Ubuntu";
+  src: url("@/fonts/Ubuntu-Regular.woff2") format("woff2");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "Ubuntu";
+  src: url("@/fonts/Ubuntu-Medium.woff2") format("woff2");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Ubuntu";
+  src: url("@/fonts/Ubuntu-Bold.woff2") format("woff2");
+  font-weight: bold;
+}
+
+/* Variables */
+$font-base__name: "Ubuntu";
+$font-secondary__name: "Arial, sans-serif";
+
+$font-base: $font-base__name, $font-secondary__name;
+
+
+/* Mixins */
+@mixin header-1() {
+  font-size: 42px;
+  line-height: 65px;
+}
+
+@mixin header-2() {
+  font-size: 33px;
+  line-height: 52px;
+}
+
+@mixin header-3() {
+  font-size: 26px;
+  line-height: 42px;
+}
+
+@mixin body-1() {
+  font-size: 20px;
+  line-height: 33px;
+}
+
+@mixin body-2() {
+  font-size: 16px;
+  line-height: 27px;
+}
+
+@mixin body-3() {
+  font-size: 13px;
+  line-height: 23px;
+}
+
+/* Declarations */
+body {
+  @include body-2();
+  font-family: $font-base;
+}
+
+h1,
+.h1 {
+  @include header-1();
+}
+
+h2,
+.h2 {
+  @include header-2();
+}
+
+h3,
+.h3 {
+  @include header-3();
+}
+
+
+.body-1 {
+  @include body-1();
+}
+
+.body-2 {
+  @include body-2();
+}
+
+.body-3 {
+  @include body-3();
+}
