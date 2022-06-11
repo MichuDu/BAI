@@ -4,7 +4,7 @@ import TodoHeader from "@/components/TodoHeader.vue";
 </script>
 
 <template>
-  <div class="todo-container">
+  <div class="todo-container container">
     <TodoHeader />
     <main class="todo-main">
       <RouterView />

@@ -1,3 +1,4 @@
+/* Form */
 .form {
   max-width: 600px;
   margin: 0 auto;
@@ -37,6 +38,7 @@
   }
 }
 
+/* Input */
 .label {
   @include body-3();
   display: block;
@@ -56,6 +58,14 @@
   }
 }
 
+/* Select */
+.select {
+  @extend .input;
+  @include body-3();
+  cursor: pointer;
+}
+
+/* Button */
 .form-actions {
   margin-top: 32px;
 }
@@ -77,16 +87,57 @@
   }
 }
 
+/* Errors */
 .form-errors {
   @include body-3();
   margin-top: 24px;
 }
 
 .form-errors-items {
-  margin: 0 -4px;
+  margin: -4px 0;
 }
 
 .form-errors-item {
-  margin: 0 4px;
+  margin: 4px 0;
   color: $color-red;
+}
+
+/* Checkbox */
+.checkbox {
+  position: absolute;
+  left: -9999px;
+
+  &:checked {
+    & + .label {
+      &::after {
+        opacity: 1;
+      }
+    }
+  }
+
+  & + .label {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 0;
+    padding-left: 32px;
+    cursor: pointer;
+
+    &::before,
+    &::after  {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+      border: 1px solid $color-black;
+    }
+
+    &::after {
+      opacity: 0;
+      background-color: $color-light-brown;
+      transition: .3s opacity;
+    }
+  }
 }

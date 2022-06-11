@@ -10,7 +10,7 @@
           <span class="todo-header-welcome-user">{{ authStore.user.name }}</span
           >!
         </p>
-        <a class="todo-header-logout link body-3" @click="authStore.logout()"
+        <a class="todo-header-logout link" @click="authStore.logout()"
           >Wyloguj się</a
         >
       </nav>
@@ -53,6 +53,17 @@ const authStore = useAuthStore();
   align-items: center;
   margin-left: auto;
   padding-left: 16px;
+
+  @media (min-width: $media-tablet) {
+    align-items: baseline;
+    flex-direction: row;
+  }
+}
+
+.todo-header-welcome {
+  @media (min-width: $media-tablet) {
+    margin-right: 24px;
+  }
 }
 
 .todo-header-welcome-user {

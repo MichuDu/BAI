@@ -3,6 +3,10 @@ body {
   min-height: 100vh;
 }
 
+.container {
+  height: 100%;
+}
+
 .wrapper {
   max-width: $container__max-width;
   margin: 0 auto;

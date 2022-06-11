@@ -1,23 +1,34 @@
 <template>
-  <div>
-    <h3>Dodaj nowe zadanie</h3>
+  <div class="todo-add">
+    <div class="todo-add-title todo-title">
+      <h3>Dodaj nowe zadanie</h3>
+    </div>
     <form @submit.prevent="addTodo">
-      <div>
-        <label for="todoName">Co Ci chodzi po głowie?</label>
-        <input type="text" name="todoName" id="todoName" v-model="data.name" />
-      </div>
-      <div>
+      <div class="field required">
+        <label class="label" for="todoName">Co Ci chodzi po głowie?</label>
         <input
+          class="input"
+          type="text"
+          name="todoName"
+          id="todoName"
+          v-model="data.name"
+        />
+      </div>
+      <div class="field">
+        <input
+          class="checkbox"
           type="checkbox"
           name="todoFlag"
           id="todoFlag"
           v-model="data.flag"
         />
-        <label for="todoFlag">Ważne</label>
+        <label class="label" for="todoFlag">Ważne</label>
       </div>
-      <button>Dodaj zadanie</button>
-      <div v-if="message">
-        <p>{{ message }}</p>
+      <div v-if="message" class="form-errors">
+        <p class="form-errors-item">{{ message }}</p>
+      </div>
+      <div class="form-actions">
+        <button class="button">Dodaj zadanie</button>
       </div>
     </form>
   </div>
@@ -53,16 +64,40 @@ function addTodo(e) {
     formData.append(key, data[key]);
 
     if (required.includes(key) && !data[key]) {
-      message.value = "To pole jest wymagane.";
+      message.value = "Uzupełnij wymagane pola.";
     }
   }
 
   store.addTodo(formData);
 
-  e.target.reset();
+  data.name = "";
+  data.flag = false;
 }
 
 onMounted(() => {
   addUserIdToData();
 });
 </script>
+
+<style lang="scss">
+@import "@/scss/utils/_variables.scss";
+
+.todo-add {
+  margin: 0 -16px;
+  padding: 32px 16px;
+  border-bottom: 1px solid $color-black;
+
+  @media (min-width: $media-tablet) {
+    margin: 0;
+    padding: 40px 0;
+  }
+}
+
+.todo-title {
+  &.todo-add-title {
+    @media (min-width: $media-tablet) {
+      margin-bottom: 40px;
+    }
+  }
+}
+</style>
