@@ -121,7 +121,8 @@ onMounted(() => {
   @media (min-width: $media-desktop) {
     display: flex;
     justify-content: center;
-    padding: 100px 0;
+    padding-top: 100px;
+    padding-bottom: 100px;
   }
 }
 
