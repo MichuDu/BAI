@@ -16,7 +16,7 @@ if ($action) {
       $task = array();
       
       if ($name) {
-        $sql = "INSERT INTO `tasks` (`id`, `user_id`, `name`, `status`) VALUES (NULL, '$userId', '$name', 0)";
+        $sql = "INSERT INTO `tasks` (`id`, `user_id`, `name`) VALUES (NULL, '$userId', '$name')";
         $db->query($sql);
 
         $id = $db->insert_id;
@@ -48,6 +48,13 @@ if ($action) {
       $id = $_POST['id'];
 
       $sql = "UPDATE `tasks` SET `status` = NOT `status` WHERE `id` = $id";
+      $query = $db->query($sql);
+      
+      break;
+    case 'changeFlag':
+      $id = $_POST['id'];
+
+      $sql = "UPDATE `tasks` SET `flag` = NOT `flag` WHERE `id` = $id";
       $query = $db->query($sql);
       
       break;

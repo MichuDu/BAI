@@ -34,6 +34,6 @@ export const useAuthStore = defineStore({
       if (this.user) {
         return this.user.id;
       }
-    }
+    },
   },
 });
