@@ -1,0 +1,48 @@
+/* Containers */
+body {
+  min-height: 100vh;
+}
+
+.container {
+  height: 100%;
+}
+
+.wrapper {
+  max-width: $container__max-width;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* Links */
+.link {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+
+  &:hover {
+    &::after {
+      width: 100%;
+    }
+  }
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    transition: .3s width;
+  }
+
+  &::before {
+    width: 100%;
+    background-color: lighten($color-purple, 30%);
+  }
+
+  &::after {
+    z-index: 1;
+    width: 0;
+    background-color: $color-purple;
+  }
+}

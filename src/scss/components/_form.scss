@@ -1,0 +1,143 @@
+/* Form */
+.form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 32px;
+  border: 2px solid $color-brown;
+  text-align: center;
+}
+
+.form-title {
+  display: inline-block;
+  margin-bottom: 32px;
+  padding: 0 24px;
+  border-bottom: 1px solid $color-brown;
+  font-weight: bold;
+}
+
+.form-note {
+  margin-bottom: 32px;
+}
+
+.field {
+  margin-bottom: 16px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &.required {
+    .label {
+      &::after {
+        content: '*';
+        margin-left: 4px;
+        color: $color-red;
+      
+      }
+    }
+  }
+}
+
+/* Input */
+.label {
+  @include body-3();
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.input {
+  padding: 4px 16px;
+  border-bottom: 1px solid $color-black;
+  transition: .3s border;
+
+  &:active,
+  &:focus,
+  &:hover {
+    border-color: $color-brown;
+  }
+}
+
+/* Select */
+.select {
+  @extend .input;
+  @include body-3();
+  cursor: pointer;
+}
+
+/* Button */
+.form-actions {
+  margin-top: 32px;
+}
+
+.button {
+  @include body-3();
+  display: inline-block;
+  padding: 8px 24px;
+  background-color: $color-light-brown;
+  border: 1px solid $color-black;
+  color: $color-black;
+  cursor: pointer;
+  font-weight: 500;
+  text-transform: uppercase;
+  transition: .3s background;
+
+  &:hover {
+    background-color: $color-brown;
+  }
+}
+
+/* Errors */
+.form-errors {
+  @include body-3();
+  margin-top: 24px;
+}
+
+.form-errors-items {
+  margin: -4px 0;
+}
+
+.form-errors-item {
+  margin: 4px 0;
+  color: $color-red;
+}
+
+/* Checkbox */
+.checkbox {
+  position: absolute;
+  left: -9999px;
+
+  &:checked {
+    & + .label {
+      &::after {
+        opacity: 1;
+      }
+    }
+  }
+
+  & + .label {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 0;
+    padding-left: 32px;
+    cursor: pointer;
+
+    &::before,
+    &::after  {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+      border: 1px solid $color-black;
+    }
+
+    &::after {
+      opacity: 0;
+      background-color: $color-light-brown;
+      transition: .3s opacity;
+    }
+  }
+}

@@ -1,47 +1,63 @@
 <template>
-  <div>
-    <div>
-      <div>
-        <router-link :to="{ name: 'LoginView' }">
+  <div class="todo-register-wrapper wrapper">
+    <div class="todo-register">
+      <form class="todo-register-form form">
+        <div class="form-title">
+          <h3>Rejestracja</h3>
+        </div>
+        <div class="field required">
+          <label class="label">Imię</label>
+          <input class="input" type="text" v-model="data.name" />
+        </div>
+        <div class="field required">
+          <label class="label">Nazwisko</label>
+          <input class="input" type="text" v-model="data.lastname" />
+        </div>
+        <div class="field required">
+          <label class="label">Login</label>
+          <input class="input" type="text" v-model="data.login" />
+        </div>
+        <div class="field required">
+          <label class="label">Adres e-mail</label>
+          <input class="input" type="email" v-model="data.email" />
+        </div>
+        <div class="field required">
+          <label class="label">Hasło</label>
+          <input class="input" type="password" v-model="data.password" />
+        </div>
+        <div class="field required">
+          <label class="label">Potwierdź hasło</label>
+          <input
+            class="input"
+            type="password"
+            v-model="data.password_confirm"
+          />
+        </div>
+        <div v-if="errors.length" class="form-errors">
+          <ul class="form-errors-list">
+            <li
+              v-for="(error, index) in errors"
+              :key="index"
+              class="form-errors-item"
+            >
+              {{ error }}
+            </li>
+          </ul>
+        </div>
+        <div class="form-actions">
+          <button class="button" type="submit" @click="registerAction">
+            Utwórz konto
+          </button>
+        </div>
+      </form>
+      <div class="todo-back">
+        <router-link
+          class="todo-back-link link body-3"
+          :to="{ name: 'LoginView' }"
+        >
           Powrót do logowania
         </router-link>
       </div>
-      <form novalidate="true">
-        <h3>Rejestracja</h3>
-        <div>
-          <label>Imię</label>
-          <input type="text" v-model="data.name" />
-        </div>
-        <div>
-          <label>Nazwisko</label>
-          <input type="text" v-model="data.lastname" />
-        </div>
-        <div>
-          <label>Login</label>
-          <input type="text" v-model="data.login" />
-        </div>
-        <div>
-          <label>Adres e-mail</label>
-          <input type="email" v-model="data.email" />
-        </div>
-        <div>
-          <label>Hasło</label>
-          <input type="password" v-model="data.password" />
-        </div>
-        <div>
-          <label>Potwierdź hasło</label>
-          <input type="password" v-model="data.password_confirm" />
-        </div>
-        <div v-if="errors.length">
-          <p>Aby utworzyć konto popraw poniższe błędy:</p>
-          <ul>
-            <li v-for="(error, index) in errors" :key="index">{{ error }}</li>
-          </ul>
-        </div>
-        <div>
-          <button type="submit" @click="registerAction">Utwórz konto</button>
-        </div>
-      </form>
     </div>
   </div>
 </template>
@@ -108,3 +124,25 @@ export default {
   },
 };
 </script>
+
+<styles lang="scss">
+@import "@/scss/utils/_variables.scss";
+
+.todo-register {
+  padding: 48px 0;
+}
+
+.todo-back {
+  margin-top: 48px;
+  text-align: center;
+}
+
+.todo-back-link {
+  font-weight: 500;
+}
+
+.todo-register-form {
+  max-width: 800px;
+  margin-top: 32px;
+}
+</styles>
