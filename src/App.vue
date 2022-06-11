@@ -6,7 +6,9 @@ import TodoHeader from "@/components/TodoHeader.vue";
 <template>
   <div class="todo-container">
     <TodoHeader />
-    <RouterView />
+    <main class="todo-main">
+      <RouterView />
+    </main>
   </div>
 </template>
 

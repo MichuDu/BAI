@@ -2,7 +2,7 @@
   <header class="todo-header">
     <div class="todo-header-wrapper wrapper">
       <div class="todo-header-title">
-        <h1>Todo App</h1>
+        <router-link class="h1" :to="'/'">Todo App</router-link>
       </div>
       <nav v-if="authStore.user" class="todo-header-nav">
         <p class="todo-header-welcome">

@@ -1,7 +1,6 @@
 /* Containers */
 body {
   min-height: 100vh;
-  background-color: $color-beige;
 }
 
 .wrapper {
@@ -13,22 +12,33 @@ body {
 /* Links */
 .link {
   position: relative;
+  display: inline-block;
   cursor: pointer;
 
   &:hover {
-    &::before {
+    &::after {
       width: 100%;
     }
   }
 
-  &::before {
+  &::before,
+  &::after {
     content: '';
     position: absolute;
     right: 0;
     bottom: 0;
-    width: 0;
     height: 1px;
-    background-color: $color-purple;
     transition: .3s width;
+  }
+
+  &::before {
+    width: 100%;
+    background-color: lighten($color-purple, 30%);
+  }
+
+  &::after {
+    z-index: 1;
+    width: 0;
+    background-color: $color-purple;
   }
 }

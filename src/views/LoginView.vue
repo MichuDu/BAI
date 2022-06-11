@@ -1,39 +1,56 @@
 <template>
-  <div>
-    <div>
-      <form @submit.prevent="onSubmit">
-        <h3>Logowanie</h3>
-        <p>
-          Jeśli masz już konto, możesz zalogować się przy pomocy loginu lub
-          emaila.
-        </p>
-        <div>
-          <label>Login / email</label>
-          <input type="text" v-model="data.login" />
+  <div class="todo-auth-wrapper wrapper">
+    <div class="todo-auth">
+      <div class="todo-login">
+        <form class="form" @submit.prevent="onSubmit">
+          <div class="form-title">
+            <h3>Logowanie</h3>
+          </div>
+          <div class="form-note">
+            <p>
+              Jeśli masz już konto, możesz zalogować się przy pomocy loginu lub
+              emaila.
+            </p>
+          </div>
+          <div class="field required">
+            <label class="label">Login / email</label>
+            <input class="input" type="text" v-model="data.login" />
+          </div>
+          <div class="field required">
+            <label class="label">Hasło</label>
+            <input class="input" type="password" v-model="data.password" />
+          </div>
+          <div v-if="errorsVisible" class="form-errors">
+            <ul class="form-errors-list">
+              <li
+                class="form-errors-item"
+                v-for="(error, index) in errors"
+                :key="index"
+              >
+                <span>{{ error }}</span>
+              </li>
+            </ul>
+          </div>
+          <div class="form-actions">
+            <button class="button" type="submit">Zaloguj się</button>
+          </div>
+        </form>
+      </div>
+      <div class="todo-to-register">
+        <div class="form">
+          <div class="form-title">
+            <h3>Rejestracja</h3>
+          </div>
+          <div class="form-note">
+            <p>Utwórz konto, aby uzyskać dostęp do aplikacji.</p>
+          </div>
+          <div class="form-actions">
+            <router-link class="button" :to="{ name: 'RegisterView' }">
+              Chcę utworzyć konto
+            </router-link>
+          </div>
         </div>
-        <div>
-          <label>Hasło</label>
-          <input type="password" v-model="data.password" />
-        </div>
-        <div v-if="errorsVisible">
-          <p>Nieudane logowanie:</p>
-          <ul>
-            <li v-for="(error, index) in errors" :key="index">
-              {{ error }}
-            </li>
-          </ul>
-        </div>
-        <div>
-          <button type="submit">Zaloguj się</button>
-        </div>
-      </form>
-    </div>
-    <div>
-      <h3>Rejestracja</h3>
-      <p>Utwórz konto, aby uzyskać dostęp do aplikacji.</p>
-      <router-link :to="{ name: 'RegisterView' }">
-        Chcę utworzyć konto
-      </router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -94,3 +111,26 @@ onMounted(() => {
   store.removeTodos();
 });
 </script>
+
+<style lang="scss">
+@import "@/scss/utils/_variables.scss";
+
+.todo-auth {
+  padding: 48px 0;
+
+  @media (min-width: $media-desktop) {
+    display: flex;
+    justify-content: center;
+    padding: 100px 0;
+  }
+}
+
+.todo-login {
+  margin-bottom: 48px;
+
+  @media (min-width: $media-desktop) {
+    margin-right: 56px;
+    margin-bottom: 0;
+  }
+}
+</style>

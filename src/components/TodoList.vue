@@ -29,7 +29,7 @@ const { todosFilters } = storeToRefs(store);
 
 onMounted(() => {
   store.getTodos();
-  setCategorizedTodos(activeCategory);
+  //setCategorizedTodos(activeCategory);
 });
 </script>
 
